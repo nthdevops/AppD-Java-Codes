@@ -13,21 +13,12 @@ public class XmlXlsxCorrelator {
 	private XlsxManager xlsx;
 	
 	public void definePaths(String xmlPath, String xlsxPath, String sheetName) {
-		if(xmlPath.equals("dev")) {
-			xml = new XmlManager("C:/Users/nthma/Desktop/rdFiles/config/geo-ip-mappings.xml");
-		}else {
-			xml = new XmlManager(xmlPath);
-		}
-		
-    	if(xlsxPath.equals("dev")) {
-    		xlsx = new XlsxManager("D:/OneDrive/Econocom/Clientes/RD/lista_banco12.xlsx", "IpsCities");
-    	}else {
-    		xlsx = new XlsxManager(xlsxPath, sheetName);
-    	}
+		this.xml = new XmlManager(xmlPath);
+    	this.xlsx = new XlsxManager(xlsxPath, sheetName);
 	}
 	
 	public void xlsxXmlCitiesCheck() {
-		System.out.println("Verificando se as cidades do Excel est„o mapeadas no XML!\n");
+		System.out.println("Verificando se as cidades do Excel est√£o mapeadas no XML!\n");
 		ArrayList<Row> allIpsXlsx =  xlsx.getRows();
 		for(Row row: allIpsXlsx) {
 			String ipExcel = xlsx.getIp(row);
@@ -43,7 +34,7 @@ public class XmlXlsxCorrelator {
 	}
 
 	public void xlsxXmlIpsCheck() {
-		System.out.println("Verificando se os IPs do Excel est„o mapeados no XML!\n");
+		System.out.println("Verificando se os IPs do Excel est√£o mapeados no XML!\n");
 		ArrayList<Row> allIpsXlsx =  xlsx.getRows();
 		for(Row row: allIpsXlsx) {
 			String ip = IpStrings.ipParse(xlsx.getIp(row),4);
@@ -56,7 +47,7 @@ public class XmlXlsxCorrelator {
 	}
 
 	public void xmlXlsxIpsCheck() {
-		System.out.println("Verificando se os IPs mapeados no XML est„o no Excel!\n");
+		System.out.println("Verificando se os IPs mapeados no XML est√£o no Excel!\n");
 		ArrayList<String> allFromIpsXml =  xml.getAllFromIPs();
 		ArrayList<String> allToIpsXml =  xml.getAllToIPs();
 		ArrayList<Row> allIpsXlsx =  xlsx.getRows();
@@ -82,7 +73,7 @@ public class XmlXlsxCorrelator {
 	}
 	
 	public void xmlCheck() {
-		System.out.println("Verificando se os IPs mapeados no XML s„o v·lidos!\n");
+		System.out.println("Verificando se os IPs mapeados no XML s√£o v√°lidos!\n");
 		ArrayList<String> allFromIpsXml =  xml.getAllFromIPs();
 		ArrayList<String> allToIpsXml =  xml.getAllToIPs();
 		if(allFromIpsXml.size() != allToIpsXml.size()) {
